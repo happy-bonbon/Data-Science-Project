@@ -1,1 +1,6 @@
 # Data-Science-Project
+# Group 6 Members:
+# Ma Estela Arenas
+# Sean Howman
+# Yuxiao Liu
+# Feng Nie
