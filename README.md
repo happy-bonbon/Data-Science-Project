@@ -61,34 +61,10 @@ Get the price category based on the highest category for the day (example if we 
 - independent variable: temperature 
 - dependent variable: maximum daily price category
 
-
-
 6.0 Predictive Modelling – train machine for learning models, evaluate their performance, and use them to make prediction
 
-linear regression = demand prediction
-classification = price prediction
-
-from sklearn import linear_model
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import mean_squared_error, r2_score
-
-X = df[[],[]]
-y = target[ ]
-
-Instantiate
-lm = linear_model.LinearRegression()
-
-Fit
-lm.fit(X_train, y_train)
-
-Predict
-Y_pred = lm.predict(X_test)
-
-Evaluate
-print(‘mean squared error’ , mean_squared_error(y_pred, y_test))
-print(‘r2 score’ , r2_score(y_pred, y_test)
-
-
+- linear regression = demand prediction
+- classification = price prediction
 
 7.0 Data Visualisation – communicate the findings with key stakeholders using plots and interactive visualisations
 
