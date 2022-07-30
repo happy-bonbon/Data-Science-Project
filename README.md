@@ -11,7 +11,7 @@
 ---
 
 - Some data cleaning has been done on weather data.
-- 
+- Data cleaning on Price table
 -
 -
 -
