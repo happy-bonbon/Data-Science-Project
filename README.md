@@ -20,7 +20,7 @@ Data sets provided were weather_data.csv with 243 rows and 21 columns, has blank
 
 3.0 Data Cleaning 
 
-   3.1 Changes Made
+     3.1 Changes Made
 
 Some data cleaning has been done on weather data.
 Data cleaning on Price table, VIC column deleted, convert time into date format and then format into string format MM-dd,a,HH:mm. so that later on, we can easily grab the date and time. convert demand to INT, as the floating point number is not that important. No change to the pricing category, all data there are looking great.
@@ -35,19 +35,19 @@ Domain Knowledge *https://www.sciencedirect.com/science/article/pii/S01409883220
 • In the mornings, sunlight has positive effects on weekend consumptions.
 - As the above example shows, there is no point to keep any data which are NOT Rain, Sunshine or Temperature related. Please see the cleaned weather data.
 
-   3.2 Assumptions
+     3.2 Assumptions
 
 There were missing data on row 190 for date 07/08/2021. The minimum, maximum and 9 am temperature will be the same as the given 3 pm temperature     which is 12oC. Rainfall is assumed to be 0 mm. 
 
-   3.3 Limitations
+     3.3 Limitations
 
 Date range used in this project is between 1st of January and 31st of August 2021. Demand usage is within the 30-minute time interval daily. 
 
 
-04 Data Exploration – form hypothesis about your defined problem by visually analyzing the data 
+4.0 Data Exploration – form hypothesis about your defined problem by visually analyzing the data 
 
 
-05 Feature Engineering – select important features and construct more meaningful ones using the raw data that you have
+5.0 Feature Engineering – select important features and construct more meaningful ones using the raw data that you have
 
 Model 1 Goal: Predict the maximum daily energy usage based on provided weather data
 Get the highest usage per 30 min row (one row only) to represent the max daily usage for the day
@@ -62,7 +62,8 @@ independent variable – temperature
 dependent variable – maximum daily price category
 
 
-06 Predictive Modelling – train machine for learning models, evaluate their performance, and use them to make prediction
+
+6.0 Predictive Modelling – train machine for learning models, evaluate their performance, and use them to make prediction
 
 linear regression = demand prediction
 classification = price prediction
@@ -71,7 +72,7 @@ from sklearn import linear_model
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error, r2_score
 
-X = df[ ]
+X = df[[],[]]
 y = target[ ]
 
 Instantiate
@@ -88,6 +89,7 @@ print(‘mean squared error’ , mean_squared_error(y_pred, y_test))
 print(‘r2 score’ , r2_score(y_pred, y_test)
 
 
-07 Data Visualisation – communicate the findings with key stakeholders using plots and interactive visualisations
+
+7.0 Data Visualisation – communicate the findings with key stakeholders using plots and interactive visualisations
 
 
