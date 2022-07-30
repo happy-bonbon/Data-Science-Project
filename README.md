@@ -52,14 +52,14 @@ Date range used in this project is between 1st of January and 31st of August 202
 Model 1 Goal: Predict the maximum daily energy usage based on provided weather data
 Get the highest usage per 30 min row (one row only) to represent the max daily usage for the day
 
-independent variable – temperature 
-dependent variable – maximum daily energy usage
+- independent variable: temperature 
+- dependent variable: maximum daily energy usage
 
 Model 2 Goal – Predict the maximum daily price category based on provided weather data
 Get the price category based on the highest category for the day (example if we have 41 low, 0 med, 7 high we will choose HIGH)
 
-independent variable – temperature 
-dependent variable – maximum daily price category
+- independent variable: temperature 
+- dependent variable: maximum daily price category
 
 
 
