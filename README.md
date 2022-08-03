@@ -16,11 +16,23 @@ It has often been observed that energy consumption tends to be at its highest on
 
 2.0 Data Mining 
 
-Data sets provided were weather_data.csv with 243 rows and 21 columns, has blanks and columns with both float and string, and price_demand_data.csv with 11,664 rows and 4 columns. 
+There are 2 available data sets, weather_data.csv contains key weather indicators, such as minimum and miximum temperatres for the city of Melbourne for each day between January and August 2021, which covers 243 rows and 21 columns. It has blanks and features in both float and string format. The other dataset is price_demand_data.csv, which contains energy price and demand figures for the state of Victoria for each half hour period between January and August 2021, covering 11,664 rows and 4 columns.
+
 
 3.0 Data Cleaning 
 
-     3.1 Changes Made
+3.1 Changes Made
+Simple observation of dataset:
+The weather_data.csv contains 243 rows, 6 rows contain several blank celss across various columns, the price_demand_data.csv is pretty consistance. 
+
+Potential 3 ways to clean the data:
+1. Delete the 6 rows in the weather_data.csv directly, which just occupy 2.5% of the weather_data.
+2. Use simple imputation method to fill the blank cells in weather_data.
+3. Analysis the correlation between each columns of weather_data, fill the blank cells either by correlation regression analysis, or domain knowledge, also can be average of closed several days.
+
+Above 3 cleaning methods data would result 3 dataset for model learning. The prediction result would be compared between different cleaned data feed in.
+
+
 
 Some data cleaning has been done on weather data.
 Data cleaning on Price table, VIC column deleted, convert time into date format and then format into string format MM-dd,a,HH:mm. so that later on, we can easily grab the date and time. convert demand to INT, as the floating point number is not that important. No change to the pricing category, all data there are looking great.
