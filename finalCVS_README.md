@@ -57,4 +57,19 @@ from price
 GROUP BY settlementdate
 ORDER BY settlementdate
 ```
+---
 
+##  Price.cvs:
+
+- Rearrange date format: GREL -> value.toDate('dd/MM').toString('MM-dd')
+- Change all numerical columns to numerical data: GREL -> value.toNumber()
+- Fix time format: GREL -> value.toNumber()
+- Imported into Database
+- Using SQL to join both tables for further analysis
+
+```SQL
+SELECT *
+  FROM new_price p
+       INNER JOIN
+       weather w ON p.SETTLEMENTDATE = w.Date;
+```
