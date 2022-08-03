@@ -1,3 +1,8 @@
+Hi Guys, Imputation done on the weather data, all blanks filled, with description in text file of what I have done (to be put in the Word Doc). I filled blanks in the problem row 189, but have low confidence in some of the values imputed. I think it's best we remove this row. I have saved a version of the excel file with this row removed.
+The process i used was to look at each feature in a scatterplot facet in OpenRefine (see Screenshots) to figure out which feature correlated with the feature that was missing data. I then plotted these two features in Excel (spreadsheet attached), got a linear correlation/equation and used this to impute each missing value.
+Let me know if you think this could be improved. I think it's a robust way to impute missing values.
+
+
 3.0 Data Cleaning – fix the inconsistencies within the data and handle missing values
 
 3.1 Changes Made
