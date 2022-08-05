@@ -9,12 +9,18 @@ from sklearn.model_selection import train_test_split
 
 def main():
     # need k-fold classification
-    dataset = pd.read_csv('final.csv')
+    dataset = pd.read_csv('combined_detail_cleaned.csv')
     # display(dataset.head)
 
-    features = dataset[['Maximum temperature (°C)', 'Minimum temperature (°C)',
-                        'Minimum temperature (°C)', 'Evaporation (mm)', 'Sunshine (hours)']]
-    classlabel = dataset['pricecategory']
+    features = dataset[['max_total_demand', 'max_price_category', 'temperature_min',
+                        'temperature_max', 'rainfall', 'evaporation', 'sunshine',
+                        'max_wind_direction', 'max_wind_speed', 'max_wind_time',
+                        'temperature_9am', 'humidity_9am', 'cloud_9am',
+                        'wind_direction_9am', 'wind_speed_9am', 'pressure_9am',
+                        'temperature_3pm', 'humidity_3pm', 'cloud_3pm',
+                        'wind_direction_3pm', 'wind_speed_3pm', 'pressure_3pm']]
+
+    classlabel = dataset['max_price_category']
 
     features_train, feature_test, class_train, class_test = train_test_split(
         features, classlabel, train_size=0.8, random_state=1)

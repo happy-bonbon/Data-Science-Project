@@ -1,0 +1,25 @@
+features = dataset[['max_total_demand',
+                    'max_price_category',
+                    'temperature_min',
+                    'temperature_max',
+                    'rainfall',
+                    'evaporation',
+                    'sunshine',
+                    'max_wind_direction',
+                    'max_wind_speed',
+                    'max_wind_time',
+                    'temperature_9am',
+                    'humidity_9am',
+                    'cloud_9am',
+                    'wind_direction_9am',
+                    'wind_speed_9am',
+                    'pressure_9am',
+                    'temperature_3pm',
+                    'humidity_3pm',
+                    'cloud_3pm',
+                    'wind_direction_3pm',
+                    'wind_speed_3pm',
+                    'pressure_3pm']]
+
+def dataset():
+    pass
