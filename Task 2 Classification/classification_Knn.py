@@ -1,7 +1,8 @@
 import pandas as pd
 from sklearn import neighbors
-from sklearn.metrics import accuracy_score
+from sklearn import preprocessing
 from sklearn.model_selection import KFold
+from sklearn.metrics import accuracy_score
 
 
 def main():
@@ -34,6 +35,11 @@ def main():
         features_train, feature_test = features.iloc[train_index, :], features.iloc[test_index, :]
         class_train, class_test = classlabel[train_index], classlabel[test_index]
         
+        # Scaling the features
+        scalar = preprocessing.StandardScaler().fit(features_train)
+        features_train = scalar.transform(features_train)
+        feature_test = scalar.transform(feature_test)
+    
         # Step 1: Instantiate 
         knn = neighbors.KNeighborsClassifier(n_neighbors = 5)
         
