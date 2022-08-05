@@ -39,40 +39,40 @@ def main():
 
     classlabel = dataset['max_price_category']
 
-    # features_train, feature_test, class_train, class_test = train_test_split(
-    #     features, classlabel, train_size=0.8, random_state=1)
 
     # K-fold Method with Classification Accuracy Formula
     k=10
     kf = KFold(n_splits=k, shuffle=True, random_state=1)
-    classification_accuracy = []
     
-    for train_index, test_index in kf.split(features):
-        # features_train, feature_test, class_train, class_test = train_test_split(
-        # features, classlabel, train_size=0.8, random_state=1)
-        features_train, feature_test = features.iloc[train_index, :], features.iloc[test_index, :]
-        class_train, class_test = classlabel[train_index], classlabel[test_index]
-        dt = DecisionTreeClassifier(
-            criterion='entropy', random_state=1, max_depth = 5)
-        dt.fit(features_train, class_train)
-        predictions = dt.predict(feature_test)
-        classification_accuracy.append(accuracy_score(class_test, predictions))
+    for x_times in range(2, 11):
+        classification_accuracy = []
+        print(f'Max depth is {x_times}')
+        for train_index, test_index in kf.split(features):
+            features_train, feature_test = features.iloc[train_index, :], features.iloc[test_index, :]
+            class_train, class_test = classlabel[train_index], classlabel[test_index]
+            dt = DecisionTreeClassifier(
+                criterion='entropy', random_state=1, max_depth = x_times)
+            dt.fit(features_train, class_train)
+            predictions = dt.predict(feature_test)
+            my_score=accuracy_score(class_test, predictions)
+            # print(f'The Score is {my_score}')
+            classification_accuracy.append(my_score)
+        print(f'The AVG Accuracy Score with Max depth of {x_times} is {sum(classification_accuracy)/k}')
+    
+    # DecisionTreeClassifier reduces the leaves of classification
+    # scale the features
+    # knn
+    
+    # features_train, feature_test, class_train, class_test = train_test_split(
+    #     features, classlabel, train_size=0.8, random_state=1)
 
-    print(*classification_accuracy)
-    print(sum(classification_accuracy)/k)
-    
-    
-    
-    
     # for x_times in range(2, 11):
     #     dt = DecisionTreeClassifier(
     #         criterion='entropy', random_state=1, max_depth = x_times)
-    #     # DecisionTreeClassifier reduces the leaves of classification
-    #     # scale the features
     #     dt.fit(features_train, class_train)
     #     predictions = dt.predict(feature_test)
     #     print(f'The Accuracy Score with Max depth of {x_times} is {accuracy_score(class_test, predictions)}')
-
+    
     # plt.figure(figsize=(25, 20))
     # featurenames = ['temperature_min','temperature_max', 'rainfall', 
     #                     'evaporation', 'sunshine', 'max_wind_speed', 
@@ -82,8 +82,6 @@ def main():
     #                     'wind_speed_3pm', 'pressure_3pm']
     # tree.plot_tree(dt, feature_names=featurenames)
     # plt.show()
-
-    # knn
 
 
 if __name__ == "__main__":
