@@ -5,6 +5,7 @@ from sklearn import tree
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.metrics import accuracy_score
 from sklearn.model_selection import train_test_split
+from sklearn.model_selection import KFold
 
 """
 The Accuracy Score with Max depth of 2 is 0.46938775510204084
@@ -20,9 +21,12 @@ The Accuracy Score with Max depth of 10 is 0.4489795918367347
 
 
 def main():
-    # need k-fold classification
+    '''classification for Max Price Category VS Weather'''
+    
+    # read cvs files with different cleaning methods
     dataset = pd.read_csv('Data/combined_detail_cleaned.csv')
-    # display(dataset.head)
+    # dataset = pd.read_csv('combined_original.csv')
+    # dataset = pd.read_csv('Data/combined_null_delete.csv')
 
     # all chooen features are numerical
     features = dataset[['temperature_min','temperature_max', 'rainfall', 
@@ -33,20 +37,41 @@ def main():
                         'wind_speed_3pm', 'pressure_3pm']]
     
 
-
     classlabel = dataset['max_price_category']
 
-    features_train, feature_test, class_train, class_test = train_test_split(
-        features, classlabel, train_size=0.8, random_state=1)
+    # features_train, feature_test, class_train, class_test = train_test_split(
+    #     features, classlabel, train_size=0.8, random_state=1)
 
-    for x_times in range(2, 11):
+    # K-fold Method with Classification Accuracy Formula
+    k=10
+    kf = KFold(n_splits=k, shuffle=True, random_state=1)
+    classification_accuracy = []
+    
+    for train_index, test_index in kf.split(features):
+        # features_train, feature_test, class_train, class_test = train_test_split(
+        # features, classlabel, train_size=0.8, random_state=1)
+        features_train, feature_test = features.iloc[train_index, :], features.iloc[test_index, :]
+        class_train, class_test = classlabel[train_index], classlabel[test_index]
         dt = DecisionTreeClassifier(
-            criterion='entropy', random_state=1, max_depth = x_times)
-        # DecisionTreeClassifier reduces the leaves of classification
-        # scale the features
+            criterion='entropy', random_state=1, max_depth = 5)
         dt.fit(features_train, class_train)
         predictions = dt.predict(feature_test)
-        print(f'The Accuracy Score with Max depth of {x_times} is {accuracy_score(class_test, predictions)}')
+        classification_accuracy.append(accuracy_score(class_test, predictions))
+
+    print(*classification_accuracy)
+    print(sum(classification_accuracy)/k)
+    
+    
+    
+    
+    # for x_times in range(2, 11):
+    #     dt = DecisionTreeClassifier(
+    #         criterion='entropy', random_state=1, max_depth = x_times)
+    #     # DecisionTreeClassifier reduces the leaves of classification
+    #     # scale the features
+    #     dt.fit(features_train, class_train)
+    #     predictions = dt.predict(feature_test)
+    #     print(f'The Accuracy Score with Max depth of {x_times} is {accuracy_score(class_test, predictions)}')
 
     # plt.figure(figsize=(25, 20))
     # featurenames = ['temperature_min','temperature_max', 'rainfall', 
