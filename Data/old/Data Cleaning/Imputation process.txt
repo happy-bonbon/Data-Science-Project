@@ -1,0 +1,32 @@
+Hi Guys, Imputation done on the weather data, all blanks filled, with description in text file of what I have done (to be put in the Word Doc). I filled blanks in the problem row 189, but have low confidence in some of the values imputed. I think it's best we remove this row. I have saved a version of the excel file with this row removed.
+The process i used was to look at each feature in a scatterplot facet in OpenRefine (see Screenshots) to figure out which feature correlated with the feature that was missing data. I then plotted these two features in Excel (spreadsheet attached), got a linear correlation/equation and used this to impute each missing value.
+Let me know if you think this could be improved. I think it's a robust way to impute missing values.
+
+
+3.0 Data Cleaning – fix the inconsistencies within the data and handle missing values
+
+3.1 Changes Made
+
+-Edited Wind Speed columns, replaced “Calm” with zero.
+-Edited blanks in Wind Speed Direction Columns where blanks related to zero wind speed; replaced blank with “CALM”
+-Transformed necessary columns from value to numeric
+-Transformed necessary columns from value to text
+-Produced numeric facets and scatterplot facets for all numeric columns, to explore blanks, outliers and non-numeric data. Also to highlight correlation of each feature with other features, in order to explore data and also to ascertain which features could be imputed using a simple linear relationship with other features (see scatterplot screenshots).
+-Impute “12.7” for missing value in row 189 for Minimum Temp, using y = 0.8503x + 8.6687 (from excel plot), where x is Min Temp, y is 3pm Temp.
+-Impute “12.7” for missing value in row 189 for Maximum Temp, using y = 0.8966x + 0.6303 (from excel plot), where x is Max Temp, y is 3pm Temp.
+-Impute numeric “0” (zero) in row 189 and 190 for Rainfall, by observing high sunshine/pressure, low cloud/humidity for that day and surrounding days had zero rainfall.
+-Impute “N” and “NE” respectively in row 188 and 189 for Direction of Maximum Wind Gust, from observations of wind direction for those days and surrounding days.
+- Impute “16” and “24” respectively in row 188 and 189 for Speed of Maximum Wind Gust, using y = 0.3886x - 0.1852 (from excel plot), where x is Max Wind, y is 3pm Wind. 
+- Impute “6.8” for missing value in row 189 for 9am Temp, using y = 0.8796x + 5.997 (from excel plot), where x is 9am Temp, y is 3pm Temp. 
+-Impute “70” for missing value in row 189 for 9am Humidity, using y = 0.3985x + 27.267 (from excel plot), where x is 9am Humidity, y is 3pm Humidity. Low Confidence.
+- Impute “NE” in row 189 for Direction of Maximum Wind Gust, from observations of wind direction for this day and surrounding days.
+- Impute “1” for missing value in row 189 for 9am Wind Speed, using y = 0.4741x + 8.4902 (from excel plot), where x is 9am Wind Speed, y is 3pm Wind Speed. Low Confidence.
+- Impute “1021.5” for missing value in row 189 for 9am Pressure, using y = 0.9376x + 61.637 (from excel plot), where x is 9am Pressure, y is 3pm Pressure.
+- Impute “1013.8” for missing value in row 243 for 9am Pressure, using y = 0.9376x + 61.637 (from excel plot), where x is 9am Pressure, y is 3pm Pressure.
+- Impute “34” in row 16 for Speed of Maximum Wind Gust, using y = 0.3886x - 0.1852 (from excel plot), where x is Max Wind, y is 3pm Wind. 
+- Impute “4” in row 150 for 3pm Cloud Amount, using y = 0.3694x + 3.3874 (from excel plot), where x is 9am Cloud, y is 3pm Cloud. Low Confidence.
+- Impute “1028.8” for missing value in row 150 for 3pm Pressure, using y = 0.9376x + 61.637 (from excel plot), where x is 9am Pressure, y is 3pm Pressure.
+- Impute “W” in row 16 for Direction of Maximum Wind Gust, from observations of wind direction for this day and surrounding days.
+- Impute “12:43” in rows 16, 189. 190 for Time of Maximum Wind Gust, from average of maximum wind gust times.
+-Convert columns to text or numbers as necessary
+
