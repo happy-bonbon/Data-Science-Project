@@ -4,6 +4,7 @@ from sklearn import preprocessing
 from sklearn.model_selection import KFold
 from sklearn.metrics import accuracy_score
 
+import plotly.express as px
 
 def main():
     '''classification for Max Price Category VS Weather Best: 10-fold 8-NN'''
@@ -45,6 +46,17 @@ def main():
         predictions = knn.predict(feature_test)
         
         # Step 4: Evaluate
+        
+        fig = px.scatter(
+        feature_test, x=0, y=1,
+        color=predictions, color_continuous_scale='RdBu',
+        symbol=class_test, symbol_map={'0': 'square-dot', '1': 'circle-dot'},
+        labels={'symbol': 'label', 'color': 'score of <br>first class'}
+        )
+        fig.update_traces(marker_size=12, marker_line_width=1.5)
+        fig.update_layout(legend_orientation='h')
+        fig.show()
+    
         my_score=accuracy_score(class_test, predictions)
         classification_accuracy.append(my_score)
     print(f'The AVG {k}-Fold Accuracy Score with {my_neighbors}-neighbors is {sum(classification_accuracy)/k}')
