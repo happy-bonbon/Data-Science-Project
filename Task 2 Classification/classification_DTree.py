@@ -10,7 +10,7 @@ from sklearn.tree import DecisionTreeClassifier
 
 
 def main():
-    '''classification for Max Price Category VS Weather'''
+    '''classification for Max Price Category VS Weather O(n**2)'''
     
     # read cvs files with different cleaning methods
     dataset = pd.read_csv('Data/combined_detail_cleaned.csv')
@@ -32,7 +32,7 @@ def main():
     k = 10
     kf = KFold(n_splits = k, shuffle = True, random_state = 88)
     
-    # x_times is the max depth of the Decision Tree Classifier
+    # x_times is the max depth of the Decision Tree Classifier (parameter tuning)
     for x_times in range(2, 13):
         classification_accuracy = []
         
@@ -50,7 +50,6 @@ def main():
         
             # Step 1: Instantiate 
             dt = DecisionTreeClassifier(
-                # criterion='entropy', random_state=1)
                 criterion='entropy', random_state=88, max_depth = x_times)
             
             # Step 2: Fit
