@@ -3,13 +3,17 @@ from sklearn import preprocessing
 from sklearn.model_selection import KFold
 from sklearn.metrics import accuracy_score
 from sklearn.tree import DecisionTreeClassifier
+# from sklearn_selection import SelectKBest, chi2, mutual_info_classif
 
 
 def main():
-    '''classification for Max Price Category VS Weather O(n**3) 20-fold 12'''
+    '''classification for Max Price Category VS Weather O(n**2)'''
     
-    # read csv file
+    # read cvs files with different cleaning methods
     dataset = pd.read_csv('Data/combined_detail_cleaned.csv')
+    # dataset = pd.read_csv('Data/combined_original.csv')
+    # dataset = pd.read_csv('Data/combined_null_delete.csv')
+    # dataset = pd.read_csv('Data/combined-detail-cleaned-AVG-temp.csv')
 
     # Selecting features
     features = dataset[['temperature_min','rainfall', 
@@ -22,7 +26,7 @@ def main():
         kf = KFold(n_splits = k, shuffle = True, random_state = 88)
         
         # x_times is the max depth of the Decision Tree Classifier (parameter tuning)
-        for x_times in range(10, 13):
+        for x_times in range(11, 13):
             classification_accuracy = []
             
             # Implementation of K-fold Method

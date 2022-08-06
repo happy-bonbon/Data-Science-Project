@@ -4,59 +4,51 @@ from sklearn import preprocessing
 from sklearn.model_selection import KFold
 from sklearn.metrics import accuracy_score
 
-
 def main():
-    '''classification for Max Price Category VS Weather O(n**2)'''
+    '''classification for Max Price Category VS Weather O(n**2) 10-fold 8'''
     
-    # read cvs files with different cleaning methods
-    dataset = pd.read_csv('Data/combined-detail-cleaned-AVG-temp.csv')
-    # dataset = pd.read_csv('Data/combined_detail_cleaned.csv')
-    # dataset = pd.read_csv('Data/combined_original.csv')
-    # dataset = pd.read_csv('Data/combined_null_delete.csv')
+    # read csv file
+    dataset = pd.read_csv('Data/combined_detail_cleaned.csv')
 
-    # all chooen features are numerical
-    features = dataset[['temperature_avg', 'rainfall', 
-                        'evaporation', 'sunshine', 'max_wind_speed', 
-                        'temperature_9am', 'humidity_9am', 'cloud_9am', 
-                        'wind_speed_9am', 'pressure_9am', 'temperature_3pm', 
-                        'humidity_3pm', 'cloud_3pm',
-                        'wind_speed_3pm', 'pressure_3pm']]
+    # Selecting features
+    features = dataset[['temperature_min', 'rainfall', 
+                        'evaporation', 'sunshine', 'max_wind_speed']]
     
     classlabel = dataset['max_price_category']
 
     # K-fold Method (cross validation) with Classification Accuracy Formula
-    k = 10
-    kf = KFold(n_splits = k, shuffle = True, random_state = 88)
+    for k in range(10,51,10):
+        kf = KFold(n_splits = k, shuffle = True, random_state = 88)
     
-    # my_neighbors is the value of K Neighbors Classifier (parameter tuning)
-    for my_neighbors in range(1,11):
-        classification_accuracy = []
-        
-        # Implementation of K-fold Method
-        for train_index, test_index in kf.split(features):
+        # my_neighbors is the value of K Neighbors Classifier (parameter tuning)
+        for my_neighbors in range(5,11):
+            classification_accuracy = []
             
-            # Split Training and Test sets
-            features_train, feature_test = features.iloc[train_index, :], features.iloc[test_index, :]
-            class_train, class_test = classlabel[train_index], classlabel[test_index]
+            # Implementation of K-fold Method
+            for train_index, test_index in kf.split(features):
+                
+                # Split Training and Test sets
+                features_train, feature_test = features.iloc[train_index, :], features.iloc[test_index, :]
+                class_train, class_test = classlabel[train_index], classlabel[test_index]
+                
+                # Scaling the features
+                scalar = preprocessing.StandardScaler().fit(features_train)
+                features_train = scalar.transform(features_train)
+                feature_test = scalar.transform(feature_test)
             
-            # Scaling the features
-            scalar = preprocessing.StandardScaler().fit(features_train)
-            features_train = scalar.transform(features_train)
-            feature_test = scalar.transform(feature_test)
-        
-            # Step 1: Instantiate 
-            knn = neighbors.KNeighborsClassifier(n_neighbors = my_neighbors)
-            
-            # Step 2: Fit
-            knn.fit(features_train, class_train)
-            
-            # Step 3: Predict
-            predictions = knn.predict(feature_test)
-            
-            # Step 4: Evaluate
-            my_score=accuracy_score(class_test, predictions)
-            classification_accuracy.append(my_score)
-        print(f'The AVG Knn Accuracy Score with K = {my_neighbors} is {sum(classification_accuracy)/k}')
+                # Step 1: Instantiate 
+                knn = neighbors.KNeighborsClassifier(n_neighbors = my_neighbors)
+                
+                # Step 2: Fit
+                knn.fit(features_train, class_train)
+                
+                # Step 3: Predict
+                predictions = knn.predict(feature_test)
+                
+                # Step 4: Evaluate
+                my_score=accuracy_score(class_test, predictions)
+                classification_accuracy.append(my_score)
+            print(f'The AVG {k}-fold Accuracy Score with K-neighbors = {my_neighbors} is {sum(classification_accuracy)/k}')
 
 
 if __name__ == "__main__":
