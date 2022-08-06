@@ -6,7 +6,7 @@ from sklearn.tree import DecisionTreeClassifier
 
 
 def main():
-    '''classification for Max Price Category VS Weather O(n**3) 20-fold 12'''
+    '''classification for Max Price Category VS Weather O(n**3) 20-fold 12-Depths'''
     
     # read csv file
     dataset = pd.read_csv('Data/combined_detail_cleaned.csv')
@@ -17,6 +17,7 @@ def main():
     
     classlabel = dataset['max_price_category']
 
+    # parameter tuning with diferent folds
     for k in range(10,51,10):
         # K-fold Method (cross validation) with Classification Accuracy Formula
         kf = KFold(n_splits = k, shuffle = True, random_state = 88)
