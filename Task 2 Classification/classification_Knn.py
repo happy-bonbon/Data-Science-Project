@@ -9,12 +9,13 @@ def main():
     '''classification for Max Price Category VS Weather'''
     
     # read cvs files with different cleaning methods
-    dataset = pd.read_csv('Data/combined_detail_cleaned.csv')
+    dataset = pd.read_csv('Data/combined-detail-cleaned-AVG-temp.csv')
+    # dataset = pd.read_csv('Data/combined_detail_cleaned.csv')
     # dataset = pd.read_csv('Data/combined_original.csv')
     # dataset = pd.read_csv('Data/combined_null_delete.csv')
 
     # all chooen features are numerical
-    features = dataset[['temperature_min','temperature_max', 'rainfall', 
+    features = dataset[['temperature_avg', 'rainfall', 
                         'evaporation', 'sunshine', 'max_wind_speed', 
                         'temperature_9am', 'humidity_9am', 'cloud_9am', 
                         'wind_speed_9am', 'pressure_9am', 'temperature_3pm', 
@@ -25,7 +26,7 @@ def main():
 
     # K-fold Method with Classification Accuracy Formula
     k = 10
-    kf = KFold(n_splits = k, shuffle = True, random_state = 1)
+    kf = KFold(n_splits = k, shuffle = True, random_state = 88)
     classification_accuracy = []
     
     # Implementation of K Neighbors Classifier with K-fold Method

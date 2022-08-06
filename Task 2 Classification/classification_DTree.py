@@ -4,6 +4,10 @@ from sklearn.model_selection import KFold
 from sklearn.metrics import accuracy_score
 from sklearn.tree import DecisionTreeClassifier
 
+# import matplotlib.pyplot as plt
+# from IPython.display import display
+# from sklearn import tree
+
 
 def main():
     '''classification for Max Price Category VS Weather'''
@@ -12,6 +16,7 @@ def main():
     dataset = pd.read_csv('Data/combined_detail_cleaned.csv')
     # dataset = pd.read_csv('Data/combined_original.csv')
     # dataset = pd.read_csv('Data/combined_null_delete.csv')
+    # dataset = pd.read_csv('Data/combined-detail-cleaned-AVG-temp.csv')
 
     # all chooen features are numerical
     features = dataset[['temperature_min','temperature_max', 'rainfall', 
@@ -23,12 +28,12 @@ def main():
     
     classlabel = dataset['max_price_category']
 
-    # K-fold Method with Classification Accuracy Formula
+    # K-fold Method (cross validation) with Classification Accuracy Formula
     k = 10
-    kf = KFold(n_splits = k, shuffle = True, random_state = 1)
+    kf = KFold(n_splits = k, shuffle = True, random_state = 88)
     
     # x_times is the max depth of the Decision Tree Classifier
-    for x_times in range(2, 11):
+    for x_times in range(2, 13):
         classification_accuracy = []
         
         # Implementation of K-fold Method
@@ -45,7 +50,8 @@ def main():
         
             # Step 1: Instantiate 
             dt = DecisionTreeClassifier(
-                criterion='entropy', random_state=1, max_depth = x_times)
+                # criterion='entropy', random_state=1)
+                criterion='entropy', random_state=88, max_depth = x_times)
             
             # Step 2: Fit
             dt.fit(features_train, class_train)
@@ -57,7 +63,13 @@ def main():
             my_score=accuracy_score(class_test, predictions)
             classification_accuracy.append(my_score)
         print(f'The AVG Decision Tree Accuracy Score with Max depth of {x_times} is {sum(classification_accuracy)/k}')
-
+        
+        #Plot the results
+        # plt.figure(figsize=(25, 20))
+        # featurenames = ['temperature_avg', 'rainfall', 
+        #                 'sunshine']
+        # tree.plot_tree(dt, feature_names=featurenames)
+        # plt.show()
 
 if __name__ == "__main__":
     main()
