@@ -6,9 +6,7 @@
 ---
 
 ## task_1 ##
-- Including 4 python codes: classification_Dtree, Knn and Chi2, MI 
-- These python codes shows how we get to the final model for task 2
-- Methods including: parameter tuning, scaling, cross-validation
+- 
 
 ---
 
