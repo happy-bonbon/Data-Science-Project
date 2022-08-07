@@ -1,14 +1,13 @@
 import pandas as pd
-from sklearn import preprocessing
 from sklearn.model_selection import KFold
 from sklearn.metrics import accuracy_score
 from sklearn.tree import DecisionTreeClassifier
 
-from sklearn.feature_selection import SelectKBest, chi2
+from sklearn.feature_selection import SelectKBest, mutual_info_classif
 
 
 def main():
-    '''classification for Max Price Category VS Weather O(n**3) 20-fold 12-Depths'''
+    '''classification for Max Price Category VS Weather) 20-fold 12-Depths'''
     
     # read csv file
     dataset = pd.read_csv('Data/combined_detail_cleaned.csv')
@@ -20,19 +19,15 @@ def main():
                     'rainfall',
                     'evaporation',
                     'sunshine',
-                    # 'max_wind_direction',
                     'max_wind_speed',
-                    # 'max_wind_time',
                     'temperature_9am',
                     'humidity_9am',
                     'cloud_9am',
-                    # 'wind_direction_9am',
                     'wind_speed_9am',
                     'pressure_9am',
                     'temperature_3pm',
                     'humidity_3pm',
                     'cloud_3pm',
-                    # 'wind_direction_3pm',
                     'wind_speed_3pm',
                     'pressure_3pm']]
     
@@ -50,12 +45,8 @@ def main():
         features_train, feature_test = features.iloc[train_index, :], features.iloc[test_index, :]
         class_train, class_test = classlabel[train_index], classlabel[test_index]
         
-        # Scaling the features
-        # scalar = preprocessing.StandardScaler().fit(features_train)
-        # features_train = scalar.transform(features_train)
-        # feature_test = scalar.transform(feature_test)
-    
-        features_selector = SelectKBest(chi2, k = 4)
+        # Mutual Information Implementation
+        features_selector = SelectKBest(mutual_info_classif, k = 3)
         features_train = features_selector.fit_transform(features_train, class_train)
         feature_test = features_selector.transform(feature_test)
         print(features_selector.scores_)
