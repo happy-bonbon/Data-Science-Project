@@ -1,9 +1,7 @@
 import pandas as pd
-from sklearn import preprocessing
 from sklearn.model_selection import KFold
 from sklearn.metrics import accuracy_score
 from sklearn.tree import DecisionTreeClassifier
-
 from sklearn.feature_selection import SelectKBest, chi2
 
 def main():

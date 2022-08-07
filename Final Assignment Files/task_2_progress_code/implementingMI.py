@@ -2,7 +2,6 @@ import pandas as pd
 from sklearn.model_selection import KFold
 from sklearn.metrics import accuracy_score
 from sklearn.tree import DecisionTreeClassifier
-
 from sklearn.feature_selection import SelectKBest, mutual_info_classif
 
 
