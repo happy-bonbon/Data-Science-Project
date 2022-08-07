@@ -13,7 +13,7 @@ def main():
 
     # Selecting features
     features = dataset[['temperature_min','rainfall', 
-                        'evaporation', 'sunshine', 'max_wind_speed']]
+                        'sunshine', 'max_wind_speed']]
     
     classlabel = dataset['max_price_category']
 
@@ -23,7 +23,7 @@ def main():
         kf = KFold(n_splits = k, shuffle = True, random_state = 88)
         
         # x_times is the max depth of the Decision Tree Classifier (parameter tuning)
-        for x_times in range(10, 13):
+        for x_times in range(2, 13):
             classification_accuracy = []
             
             # Implementation of K-fold Method

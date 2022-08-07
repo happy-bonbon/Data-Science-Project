@@ -12,7 +12,7 @@ def main():
 
     # Selecting features
     features = dataset[['temperature_min', 'rainfall', 
-                        'evaporation', 'sunshine', 'max_wind_speed']]
+                        'sunshine', 'max_wind_speed']]
     
     classlabel = dataset['max_price_category']
 
@@ -22,7 +22,7 @@ def main():
         kf = KFold(n_splits = k, shuffle = True, random_state = 88)
     
         # my_neighbors is the value of K Neighbors Classifier (parameter tuning)
-        for my_neighbors in range(5,11):
+        for my_neighbors in range(2,11):
             classification_accuracy = []
             
             # Implementation of K-fold Method
