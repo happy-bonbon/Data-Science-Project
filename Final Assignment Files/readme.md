@@ -29,3 +29,7 @@
 - Including 4 python codes: classification_Dtree, Knn and Chi2, MI 
 - Methods including: parameter tuning, scaling, cross-validation
 
+
+## data cleaning with openrefine ##
+
+- Please import the zip file to openrefine for details

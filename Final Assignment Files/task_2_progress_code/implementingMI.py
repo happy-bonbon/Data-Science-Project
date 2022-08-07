@@ -6,7 +6,7 @@ from sklearn.feature_selection import SelectKBest, mutual_info_classif
 
 
 def main():
-    '''classification for Max Price Category VS Weather) 20-fold 12-Depths'''
+    '''classification for Max Price Category VS Weather'''
     
     # read csv file
     dataset = pd.read_csv('Data/combined_detail_cleaned.csv')

@@ -5,7 +5,7 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn.feature_selection import SelectKBest, chi2
 
 def main():
-    '''classification for Max Price Category VS Weather O(n**3) 20-fold 12-Depths'''
+    '''classification for Max Price Category VS Weather'''
     
     # read csv file
     dataset = pd.read_csv('Data/combined_detail_cleaned.csv')
